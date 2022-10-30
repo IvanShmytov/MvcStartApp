@@ -8,15 +8,15 @@ namespace MvcStartApp.Middlewares
     public class LoggingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogRepository _repo;
+        private readonly ILogRepository _logrepo;
 
         /// <summary>
         ///  Middleware-компонент должен иметь конструктор, принимающий RequestDelegate
         /// </summary>
-        public LoggingMiddleware(RequestDelegate next, ILogRepository repo)
+        public LoggingMiddleware(RequestDelegate next, ILogRepository logrepo)
         {
             _next = next;
-            _repo = repo;
+            _logrepo = logrepo;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace MvcStartApp.Middlewares
                 Date = DateTime.Now,
                 Url = $"{context.Request.Host.Value + context.Request.Path}"
             };
-            await _repo.AddRequest(req);
+            await _logrepo.AddRequest(req);
             await _next.Invoke(context);
         }
     }

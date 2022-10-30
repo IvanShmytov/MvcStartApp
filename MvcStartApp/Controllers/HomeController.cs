@@ -12,7 +12,7 @@ namespace MvcStartApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBlogRepository _repo;
+        private readonly IBlogRepository _repo;        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, IBlogRepository repo)
@@ -41,11 +41,7 @@ namespace MvcStartApp.Controllers
 
             return View();
         }
-        public async Task<IActionResult> Authors()
-        {
-            var authors = await _repo.GetUsers();
-            return View(authors);
-        }
+        
         public IActionResult Privacy()
         {
             return View();

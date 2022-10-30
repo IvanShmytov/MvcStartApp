@@ -14,8 +14,6 @@ namespace MvcStartApp.Models.Db
         }
         public async Task AddRequest(Request request)
         {
-            request.Date = DateTime.Now;
-            request.Id = Guid.NewGuid();
             var entry = _context.Entry(request);
             if (entry.State == EntityState.Detached)
             {
@@ -24,9 +22,9 @@ namespace MvcStartApp.Models.Db
             await _context.SaveChangesAsync();
         }
 
-        public Task<Request[]> GetLogs()
+        public async Task<Request[]> GetLogs()
         {
-            throw new System.NotImplementedException();
+            return await _context.Requests.ToArrayAsync();
         }
     }
 }

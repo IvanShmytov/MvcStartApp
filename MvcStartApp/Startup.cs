@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcStartApp.Controllers;
 using MvcStartApp.Middlewares;
 using MvcStartApp.Models.Db;
 using System;
@@ -16,9 +17,11 @@ namespace MvcStartApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        static IWebHostEnvironment _env;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -61,5 +64,6 @@ namespace MvcStartApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }
